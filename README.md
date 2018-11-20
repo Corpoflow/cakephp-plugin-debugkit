@@ -1,4 +1,4 @@
-# CakePHP DebugKit [![Build Status](https://secure.travis-ci.org/cakephp/debug_kit.png?branch=master)](http://travis-ci.org/cakephp/debug_kit)
+# CakePHP 2 DebugKit [![Build Status](https://secure.travis-ci.org/cakephp/debug_kit.png?branch=master)](http://travis-ci.org/cakephp/debug_kit)
 
 DebugKit provides a debugging toolbar and enhanced debugging tools for CakePHP applications.
 
@@ -95,21 +95,9 @@ DebugKit has several releases, each compatible with different releases of
 CakePHP. Use the appropriate version by downloading a tag, or checking out the
 correct branch.
 
-* `1.0, 1.1, 1.2` are compatible with CakePHP 1.2.x. These releases of DebugKit
-  will not work with CakePHP 1.3. You can also use the `1.2-branch` for the mos
-  recent updates and bugfixes.
-* `1.3.0` is compatible with CakePHP 1.3.x only. It will not work with CakePHP
-  1.2. You can also use the `1.3` branch to get the most recent updates and
-  bugfixes.
-* `2.0.0` is compatible with CakePHP 2.0.x only. It will not work with previous
-  CakePHP versions.
-* `2.2.0` is compatible with CakePHP 2.2.0 and greater. It will not work with
-  older versions of CakePHP as this release uses new API's available in 2.2.
 * `2.2.x` are compatible with CakePHP 2.2.0 and greater. It is a necessary
   upgrade for people using CakePHP 2.4 as the naming conventions around loggers
   changed in that release.
-* `3.x.x` are compatible with CakePHP 3.0.0 and greater. These versions are developed
-  in the ``master`` branch.
 
 # Documentation
 
