@@ -1,0 +1,445 @@
+@import '../../Style/variables';
+@import '../../Style/themify';
+@import '../../Style/Panels/sqllog';
+
+
+#debug-kit-toolbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    overflow: visible;
+    z-index: 100000;
+    font-family: 'Consolas', monospace;
+    font-size: 14px;
+    direction: ltr;
+    box-sizing: border-box;
+
+    * {
+        box-sizing: border-box;
+    }
+
+    img {
+        border: 0;
+        outline: 0;
+    }
+
+    #panel-tabs {
+        float: right;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-radius: 8px 0 0 8px;
+
+        .panel-tab {
+            clear: none;
+            float: left;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: none;
+
+            &.opened {
+                .panel-content {
+                    display: block;
+                }
+            }
+
+            &:first-child {
+                display: list-item;
+            }
+
+            > a {
+                float: left;
+                clear: none;
+                @include themify() {
+                    background: themed('primary');
+                }
+                color: white;
+                padding: 6px;
+                border-right: 1px solid #b8bfc6;
+                border-bottom: 1px solid #b8bfc6;
+                font-size: 13px;
+                line-height: 16px;
+                margin: 0;
+                font-family: sans-serif;
+                display: block;
+                text-decoration: none;
+            }
+
+            &.opened {
+                > a {
+                    @include themify() {
+                        color: themed('primary');
+                    }
+                    background: white;
+                }
+            }
+
+            > a:hover {
+
+                @include themify() {
+                    color: themed('primary');
+                }
+                background: white;
+            }
+
+            &.icon a {
+
+                @include themify() {
+                    background: themed('primary');
+                }
+                padding: 4px;
+
+                img {
+                    width: 25px;
+                    height: 20px;
+                }
+
+            }
+
+            a.edit-value {
+                float: none;
+                display: inline;
+            }
+
+            &.icon {
+                img {
+                    display: block;
+                }
+            }
+        }
+
+    }
+
+    &.visible {
+        #panel-tabs {
+            .panel-tab {
+                display: list-item;
+            }
+        }
+    }
+
+    .panel-content {
+        position: absolute;
+        display: none;
+        left: 0;
+        padding: 10px;
+        right: 0;
+        top: 29px;
+        text-align: left;
+        background: #ffffff;
+        color: #000000;
+        width: 100%;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+        //noinspection CssOverwrittenProperties
+        height: 800px;
+        //noinspection CssOverwrittenProperties
+        height: 90vh;
+        overflow: hidden;
+        border-bottom: solid 10px;
+        overflow: auto;
+        @include themify() {
+            border-color: themed('primary');
+        }
+
+
+        p {
+            margin: 1em 0;
+        }
+
+        h2 {
+            padding: 0;
+            margin-top: 0;
+        }
+
+        h3 {
+            padding: 0;
+            margin-top: 1em;
+        }
+
+        .info {
+            padding: 4px;
+            border-top: 1px dashed #6c6cff;
+            border-bottom: 1px dashed #6c6cff;
+        }
+    }
+
+    .ui-control {
+        background: #cccccc;
+        text-align: center;
+        border-top: 1px solid #afafaf;
+        border-bottom: 1px solid #7c7c7c;
+        color: #666666;
+    }
+
+    .ui-button {
+        border-radius: 5px;
+
+        &:hover {
+            text-decoration: none;
+            background: #cccccc;
+        }
+    }
+
+    .panel-content {
+
+    }
+
+    h1, h2, h3, h4, h5, th {
+
+        @include themify() {
+            color: themed('primary');
+        }
+        margin-bottom: 0.6em;
+        background: none;
+        font-family: sans-serif;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    h4 {
+        font-size: 14px;
+    }
+
+    .debug-table {
+        width: 100%;
+        border: 1px solid #eeeeee;
+        border-left: 0;
+        clear: both;
+        margin-bottom: 20px;
+        border-spacing: 0;
+
+        td, th {
+            text-align: left;
+            border: 0;
+            border-left: 1px solid #eeeeee;
+            padding: 3px;
+            margin: 0;
+        }
+    }
+
+    table.debug-table th {
+        border-bottom: 1px solid #bbbbbb;
+        border-left: 1px solid #bbbbbb;
+        color: #222222;
+        font-weight: bold;
+        line-height: 16px;
+    }
+
+    .debug-table tr:nth-child(2n) td {
+        background: #f6f6f6;
+    }
+
+    .debug-timers .debug-table {
+        td:nth-child(2), th:nth-child(2) {
+            text-align: right;
+        }
+    }
+
+    .code-table td {
+        white-space: pre;
+        font-family: monaco, Consolas, "courier new", courier, monospace;
+
+        &:first-child {
+            width: 15%;
+        }
+
+        &:last-child {
+            width: 80%;
+        }
+    }
+
+    .panel-content.request {
+        display: block;
+    }
+
+    .neat-array {
+        list-style: none;
+
+        padding: 1px 2px 1px 20px;
+
+
+        @include themify() {
+            background: themed('primary');
+        }
+
+        margin: 0 0 1em 0;
+
+        .neat-array {
+            padding: 0 0 0 20px;
+            margin: 0;
+            border-top: 1px solid;
+            @include themify() {
+                border-color: themed('primary');
+            }
+        }
+
+        li {
+            &.has-next-level {
+                cursor: pointer;
+
+
+                &:before {
+                    content: '>';
+                    position: relative;
+                    font-weight: bold;
+                    margin: 0 0 0 10px;
+                }
+
+                > .neat-array {
+                    display: none;
+                    cursor: default;
+                }
+
+                &.next-level-open {
+                    > .neat-array {
+                        display: block;
+                    }
+                }
+            }
+
+            background: #f6f6f6;
+            border-top: 1px solid;
+            border-bottom: 1px solid;
+            @include themify() {
+                border-color: themed('primary');
+            }
+            margin: 0;
+            line-height: 1.5em;
+
+            &:hover {
+                background: #ffffff;
+            }
+
+            strong {
+                padding: 0 8px;
+                font-weight: bold;
+            }
+
+            &.expandable {
+                cursor: pointer;
+            }
+        }
+
+        .expanded {
+            border-bottom: 0;
+        }
+
+    }
+
+    .debug-kit-graph-bar, .debug-kit-graph-bar-value {
+        margin: 0;
+        padding: 0;
+        border: none;
+        overflow: hidden;
+        height: 10px;
+    }
+
+    .debug-kit-graph-bar {
+        background: #dddddd;
+        padding: 2px;
+        border-radius: 2px;
+        height: 12px;
+    }
+
+    .debug-kit-graph-bar-value {
+        background: #77d124;
+    }
+}
+
+#sqllog-tab {
+    td, .slow-query-container p {
+        font-family: Monaco, 'Consolas', "Courier New", Courier, monospace;
+    }
+}
+
+#debug-kit-toolbar #sqllog-tab a.show-slow {
+    display: block;
+    margin: 3px;
+    float: none;
+}
+
+#sqllog-tab .slow-query-container p {
+    display: block;
+    clear: both;
+    margin: 20px 0 5px;
+}
+
+#debug-kit-toolbar #sqllog-tab .panel-content-data a {
+    background: none;
+    border: none;
+}
+
+#sqllog-tab {
+    .slow-query {
+        background: #e79302;
+        font-size: 9px;
+        color: #ffffff;
+        padding: 2px;
+        white-space: nowrap;
+    }
+
+    input[type=submit] {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        font-size: 12px;
+        font-family: Monaco, 'Consolas', "Courier New", Courier, monospace;
+
+        &:hover {
+            color: darkred;
+        }
+    }
+}
+
+#debug-kit-toolbar {
+    .alert-duplicate {
+        color: red;
+    }
+
+    .panel-history {
+        display: none;
+        background: #eeffff;
+    }
+
+    #history-tab {
+        ul {
+            margin: 20px 0 0 20px;
+        }
+
+        li {
+            margin: 0 0 5px 0;
+        }
+
+        .panel-content-data a {
+            float: none;
+            display: block;
+        }
+
+        a {
+            &.active {
+                background: #f6f6f6;
+            }
+
+            &.loading:after {
+                content: ' Loading...';
+                font-style: italic;
+            }
+        }
+    }
+
+    &.minimized {
+        opacity: 0.75;
+
+        &:hover {
+            opacity: inherit;
+        }
+    }
+}

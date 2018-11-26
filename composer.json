@@ -1,6 +1,6 @@
 {
-    "name": "cakephp/debug_kit",
-    "description": "CakePHP Debug Kit",
+    "name": "corpoflow/debug_kit",
+    "description": "Unofficial fork of CakePHPs Debug Kit for CakePHP 2",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "debug", "kit"],
     "homepage": "https://github.com/cakephp/debug_kit",
@@ -14,13 +14,16 @@
         {
             "name": "CakePHP Community",
             "homepage": "https://github.com/cakephp/debug_kit/graphs/contributors"
+        },
+        {
+            "name": "Corpoflow",
+            "homepage": "https://github.com/corpoflow"
         }
+
     ],
     "support": {
-        "issues": "https://github.com/cakephp/debug_kit/issues",
-        "forum": "http://stackoverflow.com/tags/cakephp",
-        "irc": "irc://irc.freenode.org/cakephp",
-        "source": "https://github.com/cakephp/debug_kit"
+        "issues": "https://github.com/corpoflow/cakephp-plugin-debugkit/issues",
+        "source": "https://github.com/corpoflow/cakephp-plugin-debugkit/"
     },
     "require": {
         "php": ">=5.3.0",

@@ -1,0 +1,41 @@
+{
+  "name": "@corpoflow/debugkit_frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --progress",
+    "build:dev": "yarn build --env.env=dev",
+    "build:prod": "yarn build --env.env=prod",
+    "watch": "yarn build --watch",
+    "watch:dev": "yarn watch --env.env=dev",
+    "watch:prod": "yarn watch --env.env=prod"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-lodash": "^3.3.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "mini-css-extract-plugin": "^0.4.0",
+    "node-sass": "^4.8.3",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-merge": "^4.1.4",
+    "webpack-watched-glob-entries-plugin": "^2.1.4"
+  },
+  "resolutions": {
+    "webpack-cli/**/jscodeshift": "facebook/jscodeshift#247/head"
+  },
+  "dependencies": {
+    "interactjs": "^1.3.4"
+  }
+}
