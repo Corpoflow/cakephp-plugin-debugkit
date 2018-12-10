@@ -112,6 +112,8 @@
     }
 
     &.visible {
+        width: 100%;
+
         #panel-tabs {
             .panel-tab {
                 display: list-item;
