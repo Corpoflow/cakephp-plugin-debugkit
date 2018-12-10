@@ -44,9 +44,6 @@
                                 ]);
                                 ?>
                             </div>
-                            <div class="panel-content-data panel-history" id="<?=$panelUnderscore?>-history">
-                                <!-- content here -->
-                            </div>
                             <div class="panel-resizer"></div>
                         </div>
                         <?php
