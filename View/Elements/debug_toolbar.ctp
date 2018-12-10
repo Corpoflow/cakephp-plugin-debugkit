@@ -36,7 +36,7 @@
                         <?php
                         echo $this->Toolbar->panelStart($title, $panelUnderscore);
                         ?>
-                        <div class="panel-content resizable" id="<?=$panelUnderscore?>-tab">
+                        <div class="panel-content" id="<?=$panelUnderscore?>-tab">
                             <div class="panel-content-data">
                                 <?php
                                 echo $this->element($panelInfo['elementName'], $panelInfo, [
@@ -47,6 +47,7 @@
                             <div class="panel-content-data panel-history" id="<?=$panelUnderscore?>-history">
                                 <!-- content here -->
                             </div>
+                            <div class="panel-resizer"></div>
                         </div>
                         <?php
                         $this->Toolbar->panelEnd();

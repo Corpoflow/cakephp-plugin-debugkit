@@ -39,22 +39,6 @@ msgstr ""
 "Er zijn geen actieve panelen. Je moet een paneel aanzetten om de uitvoer te "
 "zien."
 
-#: views/elements/history_panel.ctp:21
-msgid "Request History"
-msgstr "Aanvraag Geschiedenis"
-
-#: views/elements/history_panel.ctp:23
-msgid "No previous requests logged."
-msgstr "Geen vorige aanvragen gelogged."
-
-#: views/elements/history_panel.ctp:25
-msgid "previous requests available"
-msgstr "vorige aanvraag beschikbaar"
-
-#: views/elements/history_panel.ctp:27
-msgid "Restore to current request"
-msgstr "Herstel naar actuele aanvraag"
-
 #: views/elements/log_panel.ctp:21
 msgid "Logs"
 msgstr "Logs"

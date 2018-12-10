@@ -1,11 +1,10 @@
 import Util from '../../Modules/Util';
-import interact from 'interactjs';
 
 /**
  *
  * @type {DebugKit}
  */
-window.DEBUGKIT = (function() {
+window.DEBUGKIT = (function () {
 
     /**
      *
@@ -90,42 +89,50 @@ window.DEBUGKIT = (function() {
          * @private
          */
         _bindResize() {
-            interact('.panel-content')
-            .resizable({
-                // resize from all edges and corners
-                edges: {left: false, right: false, bottom: true, top: false},
 
-                // keep the edges inside the parent
-                restrictEdges: {
-                    endOnly: true
-                },
+            Util.iterate(this.panelTabs, (panelTab) => {
 
-                // minimum size
-                restrictSize: {
-                    min: {width: 100, height: 50},
+                let startY, startHeight;
 
-                    restriction: 'body'
-                },
-                axis: 'y'
-            })
-            .on('resizemove', function(event) {
-                let element = event.target;
-                let bodyRect = document.body.getBoundingClientRect(),
-                    elemRect = element.getBoundingClientRect(),
-                    offset = elemRect.top - bodyRect.top;
 
-                // Get the viewport height
-                let viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+                let panelContent = panelTab.parentElement.querySelector('.panel-content');
+                let resizer = panelTab.parentElement.querySelector('.panel-resizer');
 
-                let newHeight = event.rect.height;
+                resizer.addEventListener('mousedown', initDrag, false);
 
-                // Make sure we dont go over the viewport
-                if ((newHeight + (offset * 2)) > viewportHeight) {
-                    newHeight = viewportHeight - (offset * 2);
+                function initDrag(e) {
+                    startY = e.clientY;
+                    startHeight = parseInt(document.defaultView.getComputedStyle(panelContent).height, 10);
+                    document.documentElement.addEventListener('mousemove', doDrag, false);
+                    document.documentElement.addEventListener('mouseup', stopDrag, false);
                 }
 
-                event.target.style.height = newHeight + 'px';
+                function doDrag(e) {
+
+                    let bodyRect = document.body.getBoundingClientRect(),
+                        elemRect = panelContent.getBoundingClientRect(),
+                        offset = elemRect.top - bodyRect.top;
+
+                    // Get the viewport height
+                    let viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+                    let newHeight = (startHeight + e.clientY - startY);
+
+                    // Make sure we dont go over the viewport
+                    if ((newHeight + (offset * 2)) > viewportHeight) {
+                        newHeight = viewportHeight - (offset * 2);
+                    }
+
+                    panelContent.style.height = `${newHeight}px`;
+                }
+
+                function stopDrag(e) {
+                    document.documentElement.removeEventListener('mousemove', doDrag, false);
+                    document.documentElement.removeEventListener('mouseup', stopDrag, false);
+                }
             });
+
+
         }
 
         _startResize(e) {

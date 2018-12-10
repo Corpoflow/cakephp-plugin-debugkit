@@ -14,9 +14,6 @@
  */
 
 $headers = ['Query', 'Affected', 'Num. rows', 'Took (ms)', 'Actions'];
-if (isset($debugKitInHistoryMode)) {
-    $content = $this->Toolbar->readCache('sql_log', $this->request->params['pass'][0]);
-}
 
 echo $this->Html->tag('h2', __d('debug_kit', 'Sql Logs'));
 
@@ -29,13 +26,9 @@ if (empty($content)) {
             <?php
             echo $this->Html->tag('h4', $dbName);
 
-            if ( ! isset($debugKitInHistoryMode)) {
-                $queryLog = $this->Toolbar->getQueryLogs($dbName, [
-                    'explain' => $explain, 'threshold' => $content['threshold'],
-                ]);
-            } else {
-                $queryLog = $content[$dbName];
-            }
+            $queryLog = $this->Toolbar->getQueryLogs($dbName, [
+                'explain' => $explain, 'threshold' => $content['threshold'],
+            ]);
             if (empty($queryLog['queries'])) {
                 if (Configure::read('debug') < 2) {
                     echo ' ' . __d('debug_kit', 'No query logs when debug < 2.');

@@ -60,7 +60,6 @@ class ToolbarComponent extends Component implements CakeEventListener {
      * @var array
      */
     protected $_defaultPanels = [
-        'DebugKit.History',
         'DebugKit.Session',
         'DebugKit.Request',
         'DebugKit.SqlLog',
@@ -158,12 +157,6 @@ class ToolbarComponent extends Component implements CakeEventListener {
         DebugMemory::record(__d('debug_kit', 'Component initialization'));
 
         $this->cacheKey .= $this->Session->read('Config.userAgent');
-        if (
-            in_array('DebugKit.History', $panels) ||
-            (isset($settings['history']) && $settings['history'] !== false)
-        ) {
-            $this->_createCacheConfig();
-        }
 
         $this->_loadPanels($panels, $settings);
 
@@ -309,7 +302,6 @@ class ToolbarComponent extends Component implements CakeEventListener {
             __d('debug_kit', 'Processing toolbar state')
         );
         $vars = $this->_gatherVars($controller);
-        $this->_saveState($controller, $vars);
         DebugTimer::stop('processToolbar');
     }
 
@@ -332,7 +324,6 @@ class ToolbarComponent extends Component implements CakeEventListener {
             __d('debug_kit', 'Processing toolbar data')
         );
         $vars = $this->_gatherVars($controller);
-        $this->_saveState($controller, $vars);
 
         $this->javascript = array_unique(array_merge($this->javascript, $vars['javascript']));
         $this->css = array_unique(array_merge($this->css, $vars['css']));
@@ -365,22 +356,6 @@ class ToolbarComponent extends Component implements CakeEventListener {
 
         DebugTimer::stop('processToolbar');
         DebugMemory::record(__d('debug_kit', 'Controller render start'));
-    }
-
-    /**
-     * Load a toolbar state from cache
-     *
-     * @param int $key The key.
-     *
-     * @return array The toolbar state.
-     */
-    public function loadState($key) {
-        $history = Cache::read($this->cacheKey, 'debug_kit');
-        if (isset($history[$key])) {
-            return $history[$key];
-        }
-
-        return [];
     }
 
     /**
@@ -462,55 +437,6 @@ class ToolbarComponent extends Component implements CakeEventListener {
                 $this->panels[Inflector::underscore($panel)] = $panelObj;
             }
         }
-    }
-
-    /**
-     * Save the current state of the toolbar varibles to the cache file.
-     *
-     * @param \Controller|object $controller Controller instance
-     * @param array              $vars       Vars to save.
-     *
-     * @return void
-     */
-    protected function _saveState(Controller $controller, $vars) {
-        $config = Cache::config('debug_kit');
-        if (empty($config) || ! isset($this->panels['history'])) {
-            return;
-        }
-        $history = Cache::read($this->cacheKey, 'debug_kit');
-        if (empty($history)) {
-            $history = [];
-        }
-        if (count($history) == $this->panels['history']->history) {
-            array_pop($history);
-        }
-
-        if (isset($vars['variables']['content'])) {
-            // Remove unserializable native objects.
-            array_walk_recursive($vars['variables']['content'], function(&$item) {
-                if (
-                    $item instanceof Closure ||
-                    $item instanceof PDO ||
-                    $item instanceof SimpleXmlElement
-                ) {
-                    $item = 'Unserializable object - ' . get_class($item);
-                } elseif ($item instanceof Exception) {
-                    $item = sprintf(
-                        'Unserializable object - %s. Error: %s in %s, line %s',
-                        get_class($item),
-                        $item,
-                        $item->getMessage(),
-                        $item->getFile(),
-                        $item->getLine()
-                    );
-                }
-
-                return $item;
-            });
-        }
-        unset($vars['history']);
-        array_unshift($history, $vars);
-        Cache::write($this->cacheKey, $history, 'debug_kit');
     }
 
 }
