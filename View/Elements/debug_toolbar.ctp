@@ -44,7 +44,6 @@
                                 ]);
                                 ?>
                             </div>
-                            <div class="panel-resizer"></div>
                         </div>
                         <?php
                         $this->Toolbar->panelEnd();
