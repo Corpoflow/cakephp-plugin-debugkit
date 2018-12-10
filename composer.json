@@ -1,5 +1,5 @@
 {
-    "name": "corpoflow/debug_kit",
+    "name": "cakephp-plugin/debug_kit",
     "description": "Unofficial fork of CakePHPs Debug Kit for CakePHP 2",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "debug", "kit"],
