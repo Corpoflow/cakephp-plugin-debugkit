@@ -4,12 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --progress",
+    "build": "yarn clean && webpack --progress",
     "build:dev": "yarn build --env.env=dev",
     "build:prod": "yarn build --env.env=prod",
     "watch": "yarn build --watch",
     "watch:dev": "yarn watch --env.env=dev",
-    "watch:prod": "yarn watch --env.env=prod"
+    "watch:prod": "yarn watch --env.env=prod",
+    "clean": "rimraf ./webroot/css && rimraf ./webroot/js"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -29,6 +30,7 @@
     "style-loader": "^0.20.3",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
+    "webpack-extraneous-file-cleanup-plugin": "^2.0.0",
     "webpack-merge": "^4.1.4",
     "webpack-watched-glob-entries-plugin": "^2.1.4"
   },

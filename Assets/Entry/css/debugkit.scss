@@ -287,6 +287,17 @@
         }
 
         li {
+
+            background: #f6f6f6;
+            border-top: 1px solid;
+            border-color: #e0e0e0;
+            margin: 0;
+            line-height: 1.5em;
+
+            &:first-child {
+                border-top: 0;
+            }
+
             &.has-next-level {
                 cursor: pointer;
 
@@ -309,15 +320,6 @@
                     }
                 }
             }
-
-            background: #f6f6f6;
-            border-top: 1px solid;
-            border-bottom: 1px solid;
-            @include themify() {
-                border-color: themed('primary');
-            }
-            margin: 0;
-            line-height: 1.5em;
 
             &:hover {
                 background: #ffffff;

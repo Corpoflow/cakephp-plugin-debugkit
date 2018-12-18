@@ -10,6 +10,9 @@ const WebpackWatchedGlobEntries = require('webpack-watched-glob-entries-plugin')
 // Css plugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+// Plugin to delete empty js entries
+const ExtraneousFileCleanupPlugin = require('webpack-extraneous-file-cleanup-plugin');
+
 // Config
 module.exports = (env) => {
 
@@ -22,7 +25,7 @@ module.exports = (env) => {
     return {
 
         // Devtool
-        devtool: 'source-map',
+        devtool: 'cheap-source-map',
 
         // Entries
         entry: WebpackWatchedGlobEntries.getEntries(path.resolve(__dirname, 'Assets', 'Entry', '**', '*.{js,scss}')),
@@ -85,6 +88,7 @@ module.exports = (env) => {
         optimization: {
             splitChunks: {
                 chunks: 'all',
+                minChunks: Infinity,
                 cacheGroups: {
                     vendors: false,
                     default: false
@@ -110,11 +114,11 @@ module.exports = (env) => {
                 chunkFilename: '[name].css'
             }),
             new WebpackWatchedGlobEntries(),
-            new webpack.ProvidePlugin({
-                $: 'jquery',
-                jQuery: 'jquery',
-                'window.jQuery': 'jquery'
-            })
+            new ExtraneousFileCleanupPlugin(
+                {
+                    extensions: ['.js', '.js.map']
+                }
+            ),
         ]
     };
 };
